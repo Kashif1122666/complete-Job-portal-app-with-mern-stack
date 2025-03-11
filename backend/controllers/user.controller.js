@@ -47,7 +47,7 @@ export const login = async (req,res)=>{
             return res.status(400).json({message:"Account doesn't exist with current role." , success:false});
         }
         const tokenData = {
-            id:user._id,
+            userId:user._id,
         }
         const token = jwt.sign(tokenData,process.env.JWT_SECRET,{expiresIn:'1d'});
         user = {
