@@ -23,6 +23,7 @@ export const register = async (req,res)=>{
         });
         return res.status(201).json({message:"Account created successfully." , success:true});
     } catch (error) {
+        console.log(error.message);
         
     }
 }
@@ -79,24 +80,25 @@ export const logout = async (req,res)=>{
 export const updateProfile = async (req,res)=>{
     try {
         const {fullname,email,phoneNumber,bio,skills} = req.body;
-        const {file}= req.file;
-        if(!fullname || !email || !phoneNumber || !bio || !skills){
-            return res.status(400).json({message:"All fields are required" , success:false});
-        }
+        const file= req.file;
+        let skillsArray;
            // cloudnery over here
+            if(skills){
 
-        const skillsArray = skills.split(",");
+                skillsArray = skills.split(",");
+            }
         const userId = req.id; // from  middleware authentication
         let user = await User.findById(userId);
         if(!user){
             return res.status(400).json({message:"User not found" , success:false});
         }
         // update user data
-        user.fullname = fullname;
-        user.email = email;
-        user.phoneNumber = phoneNumber;
-        user.profile.bio = bio;
-        user.profile.skills = skillsArray;
+
+       if(fullname)     user.fullname = fullname;
+       if(email)        user.email = email;
+       if(phoneNumber)  user.phoneNumber = phoneNumber;
+       if(bio)          user.profile.bio = bio;
+       if(skills)       user.profile.skills = skillsArray;
 
         // we will add resume later 
 

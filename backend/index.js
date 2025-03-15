@@ -3,6 +3,8 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './utils/db.js';
+import userRoute from "./routes/user.routes.js"
+import companyRoute from './routes/company.route.js'
 dotenv.config({});
 const app = express();
 
@@ -16,6 +18,14 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 connectDB()
+
+//api's 
+
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/compnay", companyRoute);
+
+
+
 app.get('/home' ,(req,res)=>{
   res.status(200).json({
     message:"i am backend"
