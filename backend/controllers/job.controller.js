@@ -1,5 +1,5 @@
 import Job from "../models/job.model.js";
-// admin will post the job
+// admin will post the job .
 export const postJob = async (req, res) => {
     try {
         const {title,description,requirements,salary,location,jobType,experience,position,companyId} = req.body;
