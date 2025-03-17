@@ -1,4 +1,4 @@
-import Job from "../models/job.model.js";
+import {Job} from "../models/job.model.js";
 // admin will post the job .
 export const postJob = async (req, res) => {
     try {
@@ -15,7 +15,7 @@ export const postJob = async (req, res) => {
             salary:Number(salary),
             location,
             jobType,
-            experienceLevel:experience,
+            experience,
             position,
             company: companyId,
             created_by: userId,
@@ -36,7 +36,9 @@ export const getAllJobs = async (req, res) => {
                 {description:{$regex:keyword,$options:'i'}},
             ]
         };
-        const jobs = await Job.find(query);
+        const jobs = await Job.find(query).populate({
+            path:"company",
+        }).sort({createdAt:-1});
         if(!jobs){
             return res.status(404).json({message:"Jobs not found",success:false});
         };
