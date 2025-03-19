@@ -42,7 +42,7 @@ const jobSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    applicantions:[{
+    applications:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Application',
     }]

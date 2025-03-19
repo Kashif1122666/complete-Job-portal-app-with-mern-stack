@@ -1,5 +1,7 @@
 import { Application } from "../models/application.model.js";
-import { Job } from "../models/job.model.js";
+import { Job } from '../models/job.model.js';
+import { User } from "../models/user.model.js"; 
+
 
 export const applyJob = async (req,res)=>{
   try {
@@ -23,7 +25,7 @@ export const applyJob = async (req,res)=>{
       job:jobId,
       applicant:userId,
     }); 
-    job.applicantions.push(application._id);
+    job.applications.push(application._id);
     await job.save();
     return res.status(201).json({message:"Application created successfully",application,success:true});
   } catch (error) {

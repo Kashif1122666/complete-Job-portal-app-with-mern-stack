@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { job } from "./job.model";
 
 const applicationSchema = new mongoose.Schema({
     job:{
@@ -9,7 +8,7 @@ const applicationSchema = new mongoose.Schema({
     },
     applicant:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user',
+        ref:'User',
         required:true
     },
     status:{
