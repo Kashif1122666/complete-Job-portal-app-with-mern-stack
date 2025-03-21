@@ -32,8 +32,8 @@ const Navbar = () => {
 
 
 
-                <Popover>
-                <PopoverTrigger asChild>
+                <Popover >
+                <PopoverTrigger asChild >
                   <Avatar className={'cursor-pointer'}>
                     <AvatarImage
                       src="https://github.com/shadcn.png"
@@ -41,7 +41,7 @@ const Navbar = () => {
                     />
                   </Avatar>
                 </PopoverTrigger>
-                <PopoverContent className={'w-80'}>
+                <PopoverContent className={'w-80  bg-white shadow-md border border-gray-200 rounded-lg p-4'}>
                 <div className="flex gap-4 space-y-2">
       
                 <Avatar className={'cursor-pointer'}>
