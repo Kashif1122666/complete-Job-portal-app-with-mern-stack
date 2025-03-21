@@ -19,7 +19,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
       fullname:user?.fullname,
       email:user?.email,
       phoneNumber:user?.phoneNumber,
-      bio:user?.profile?.skills?.map(skill => skill),
+      skills:user?.profile?.skills?.map(skill => skill) || [],
+      bio:user?.profile?.bio,
       file:user?.profile?.resume
     });
 
@@ -95,6 +96,21 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 </Label>
                 <Input id="bio" name="bio" className={"col-span-3"}  value={input.bio} onChange={changeEventHandler}/>
               </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+  <Label htmlFor="skills" className="text-right">
+    Skills
+  </Label>
+  <Input
+    id="skills"
+    name="skills"
+    type="text"
+    className="col-span-3"
+    value={input.skills} 
+    onChange={changeEventHandler}
+    placeholder="Enter skills separated by commas"
+  />
+</div>
+
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="file" className="text-right">
                   Resume
