@@ -11,6 +11,9 @@ export const register = async (req,res)=>{
         if(!fullname || !email || !phoneNumber || !password || !role){
             return res.status(400).json({message:"All fields are required" , success:false});
         }
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
         const user = await User.findOne({email});
         if(user){
             return res.status(400).json({message:"User already exists" , success:false});
@@ -21,7 +24,10 @@ export const register = async (req,res)=>{
             email,
             phoneNumber,
             password:hashedPassword,
-            role
+            role,
+            profile:{
+                profilePhoto :cloudResponse.secure_url,
+            }
         });
         return res.status(201).json({message:"Account created successfully." , success:true});
     } catch (error) {
@@ -84,11 +90,18 @@ export const updateProfile = async (req,res)=>{
     try {
         const {fullname,email,phoneNumber,bio,skills} = req.body;
         const file= req.file;
+       
+       
         // cloudnery over here
 
 
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        if(file){
+            const fileUri = getDataUri(file);
+        }
+        let cloudResponse = null;
+       if(file){
+         cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+       };
 
         let skillsArray;
             if(skills){
