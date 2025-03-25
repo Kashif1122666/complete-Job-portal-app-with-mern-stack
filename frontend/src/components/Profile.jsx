@@ -64,7 +64,7 @@ const Profile = () => {
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label className="text-md font-bold">Resume</Label>
-          {resume ? <a target="blank" href="#" className="text-blue-500 w-full hover:underline cursor-pointer">Farooq's resume</a> : <p>NA</p>}
+          {resume ? <a target="_blank" href={user?.profile?.resume} className="text-blue-500 w-full hover:underline cursor-pointer">{user?.profile?.resumeOriginalName}</a> : <p>NA</p>}
         </div>
       </div>
         <div className="max-w-4xl mx-auto bg-white rounded-2xl">

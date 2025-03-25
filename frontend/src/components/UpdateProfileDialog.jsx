@@ -29,7 +29,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
           }
 
           const fileChangeHandler = (e)=>{
-              const file = e.target.file?.[0];
+              const file = e.target.files?.[0];
               setInput({...input , file});
 
           }
@@ -42,10 +42,11 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
             formData.append("phoneNumber",input.phoneNumber);
             formData.append("bio",input.bio);
             formData.append("skills",input.skills);
-            if(file){
-                formData.append("file",file);
+            if(input.file){
+                formData.append("file",input.file);
             }
                   try {
+                    setLoading(true);
                      const res = await axios.post(`${USER_API_END_POINT}/updateProfile`,formData,{
                       headers:{
                         "Content-Type":'multipart/form-data'
@@ -59,6 +60,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                   } catch (error) {
                     console.log(error);
                     toast.error(error.message)
+                  }finally{
+                   setLoading(false)   
                   }
                   setOpen(false)
           }
@@ -115,7 +118,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 <Label htmlFor="file" className="text-right">
                   Resume
                 </Label>
-                <Input id="file" name="file" type="file" accept="application/pdf" className={"col-span-3"} onChange={fileChangeHandler} />
+                <Input id="file" name="file" type="file" accept="application/pdf"  className={"col-span-3"} onChange={fileChangeHandler} />
               </div>
             </div>
             <DialogFooter>
