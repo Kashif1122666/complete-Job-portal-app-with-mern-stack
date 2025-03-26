@@ -43,7 +43,7 @@ const getDataUri = (file) => {
 
     } catch (error) {
         console.error('Error in getDataUri:', error);
-        throw new Error(`File processing failed: ${error.message}`);
+        throw new Error(`File processing failed: ${error.response.data.message}`);
     }
 };
 

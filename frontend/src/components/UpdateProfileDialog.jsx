@@ -59,7 +59,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                      }
                   } catch (error) {
                     console.log(error);
-                    toast.error(error.message)
+                    toast.error(error.response.data.message)
                   }finally{
                    setLoading(false)   
                   }
