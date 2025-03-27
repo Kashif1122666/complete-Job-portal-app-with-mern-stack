@@ -4,9 +4,9 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setSearchCompanyByText } from '@/redux/companySlice'
 import AdminJobsTabel from './AdminJobsTabel'
 import useGetAllAdminJobs from '@/hooks/useGetAllAdminJobs'
+import { setSearchJobByText } from '@/redux/jobSlice'
 
 const adminJobs = () => {
   useGetAllAdminJobs();
@@ -14,7 +14,7 @@ const adminJobs = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     useEffect(()=>{
-            dispatch(setSearchCompanyByText(input))
+            dispatch(setSearchJobByText(input))
     },[input]);
   return (
     <div>
@@ -23,10 +23,10 @@ const adminJobs = () => {
            <div className='flex items-center justify-between my-5'>
            <Input
             className='w-fit' 
-            placeholder='Filter by name'
+            placeholder='Filter by name,role'
             onChange={(e)=> setInput(e.target.value)}
             />
-            <Button onClick={()=> navigate("/admin/companies/create")} className='bg-black cursor-pointer text-white'>New Jobs</Button>
+            <Button onClick={()=> navigate("/admin/jobs/create")} className='bg-black cursor-pointer text-white'>New Jobs</Button>
            </div>
            <AdminJobsTabel/>
         </div>

@@ -17,17 +17,16 @@ import store from "@/redux/store";
 import { useNavigate } from "react-router-dom";
 
 const AdminJobsTabel = () => {
-  const {companies,searchCompanyByText} = useSelector(store=> store.company);
-  const {allAdminJobs} = useSelector(store => store.job);
-  const [filterJobs,SetFilterJobs]= useState([]);
+  const {allAdminJobs,searchJobByText} = useSelector(store => store.job);
+  const [filterJobs,SetFilterJobs]= useState(allAdminJobs);
   const navigate = useNavigate();
   useEffect(() => {
-    const filteredCompany = allAdminJobs.filter((job) => {
-      if (!searchCompanyByText) return true;
-      return job?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
+    const filteredJobs = allAdminJobs.filter((job) => {
+      if (!searchJobByText) return true;
+      return job?.title?.toLowerCase().includes(searchJobByText.toLowerCase()) ||  job?.company?.name.toLowerCase().includes(searchJobByText.toLowerCase());
     });
-    SetFilterJobs(filteredCompany);
-  }, [allAdminJobs, searchCompanyByText]);
+    SetFilterJobs(filteredJobs);
+  }, [allAdminJobs, searchJobByText]);
 
   return (
     <div>
