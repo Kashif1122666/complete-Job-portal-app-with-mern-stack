@@ -8,8 +8,13 @@ import axios from 'axios'
 import { COMPANY_API_END_POINT } from '@/utils/constant'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
+import { useSelector } from 'react-redux'
+import store from '@/redux/store'
+import useGetCompanyById from '@/hooks/useGetCompanyById'
 
 const CompanySetup = () => {
+  const params = useParams();
+  useGetCompanyById(params.id)
     const [input,setInput] = useState({
         name:"",
         description:"",
@@ -17,8 +22,8 @@ const CompanySetup = () => {
         location:"",
         file:null
     });
+    const {singleCompany} = useSelector(store=>store.company);
     const [loading,setLoading] = useState(false);
-    const params = useParams();
     const navigate = useNavigate();
     const changeEventHandler = (e)=>{
         setInput({
@@ -44,8 +49,12 @@ const CompanySetup = () => {
 
     if (!isUpdated && !input.file) {
         toast.info("No changes detected.");
-        return;
+
+       
     }
+
+   
+    
 
            const formData = new FormData();
            formData.append("name",input.name);
@@ -77,13 +86,13 @@ const CompanySetup = () => {
 
                 useEffect(()=>{
                      setInput({
-                        name:"",
-                        description:"",
-                        website:"",
-                        location:"",
-                        file:null
+                        name: singleCompany.name || "",
+                        description: singleCompany.description || "",
+                        website: singleCompany.website || "",
+                        location: singleCompany.location || "",
+                        file:singleCompany.file || null,
                      })
-                },[]);
+                },[singleCompany]);
 
   return (
     <div>
