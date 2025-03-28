@@ -11,7 +11,7 @@ import {
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Popover, PopoverTrigger } from "../ui/popover";
 import { PopoverContent } from "@radix-ui/react-popover";
-import { Edit2, MoreHorizontal } from "lucide-react";
+import { Edit2, Eye, MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import store from "@/redux/store";
 import { useNavigate } from "react-router-dom";
@@ -45,9 +45,9 @@ const AdminJobsTabel = () => {
         {
 
                  
-filterJobs?.map((job)=>(
+filterJobs?.map((job ,index)=>(
                    
-                         <tr>
+                         <tr key={index}>
                          
                          
                       
@@ -58,10 +58,16 @@ filterJobs?.map((job)=>(
             <Popover>
                 <PopoverTrigger><MoreHorizontal/></PopoverTrigger>
                 <PopoverContent className="w-32  pl-7">
-                    <div onClick={()=> navigate(`/admin/companies/${job._id}`)} className="flex items-center gap-2 w-fit cursor-pointer ">
+                   <div className="bg-white  rounded-sm">
+                   <div onClick={()=> navigate(`/admin/companies/${job._id}`)} className="flex items-center gap-2 w-fit cursor-pointer ">
                         <Edit2 className="w-4"/>
                         <span>Edit</span>
                     </div>
+                    <div onClick={()=> navigate(`/admin/jobs/${job._id}/applicants`)} className="flex items-center bg-white w-fit gap-2 cursor-pointer mt-2">
+                      <Eye className="w-4"/>
+                      <span>applicants</span>
+                    </div>
+                   </div>
                 </PopoverContent>
             </Popover>
           </TableCell>
