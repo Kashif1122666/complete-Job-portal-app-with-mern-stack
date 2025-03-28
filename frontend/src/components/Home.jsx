@@ -19,11 +19,13 @@ const Home = () => {
     }
   },[]);
   return (
-    <div>
+    <div className="overflow-x-hidden">
         <Navbar/>
+        <div className="px-4 sm:px-6 lg:px-8">
         <HeroSection/>
         <CategoryCarousel/>
         <LatestJobs/>
+        </div>
         <Footer/>
     </div>
   )

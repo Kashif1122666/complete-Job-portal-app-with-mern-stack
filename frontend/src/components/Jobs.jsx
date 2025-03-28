@@ -8,7 +8,7 @@ const Jobs = () => {
     // const jobArray = [1,2,3,4,5,6,7,8];  // dummy
     const {allJobs,searchedQuery} = useSelector(store=>store.job);
     const [filterJobs,setFilterJobs] = useState(allJobs);
-    console.log(allJobs)
+    
 
     useEffect(()=>{
           if(searchedQuery){
