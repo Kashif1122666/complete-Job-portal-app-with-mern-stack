@@ -79,7 +79,7 @@ const Navbar = () => {
                 <Avatar className={"cursor-pointer"}>
                   <AvatarImage
                     src={user?.profile?.profilePhoto}
-                    alt="@shadcn"
+                    alt=""
                   />
                 </Avatar>
               </PopoverTrigger>
@@ -92,7 +92,7 @@ const Navbar = () => {
                   <Avatar className={"cursor-pointer"}>
                     <AvatarImage
                       src={user?.profile?.profilePhoto}
-                      alt="@shadcn"
+                      alt=""
                     />
                   </Avatar>
                   <div className="mb-3">
