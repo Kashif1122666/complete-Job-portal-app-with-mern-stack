@@ -95,14 +95,12 @@ export const updateProfile = async (req,res)=>{
         // cloudnery over here
 
 
+        let cloudResponse = null;
         if(file){
             const fileUri = getDataUri(file);
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content)
         }
-        let cloudResponse = null;
-       if(file){
-         cloudResponse = await cloudinary.uploader.upload(fileUri.content)
-       };
-
+    
         let skillsArray;
             if(skills){
 

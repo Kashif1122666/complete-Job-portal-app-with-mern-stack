@@ -18,15 +18,15 @@ import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = () => {
   const {companies,searchCompanyByText} = useSelector(store=> store.company);
-  const [filterCompany,SetFilterCompany]= useState(companies);
+  const [filterCompany,SetFilterCompany]= useState(companies || []);
   const navigate = useNavigate();
   useEffect(()=>{
-      const filteredCompany = companies.length > 0 && companies.filter((company)=>{
+      const filteredCompany = companies.length > 0 ? companies.filter((company)=>{
         if(!searchCompanyByText){
           return true
         };
         return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
-      })
+      }) :[];
       SetFilterCompany(filteredCompany);
   },[companies,searchCompanyByText]);
 

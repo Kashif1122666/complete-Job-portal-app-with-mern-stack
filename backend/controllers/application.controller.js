@@ -20,7 +20,7 @@ export const applyJob = async (req,res)=>{
     if(!job){
       return res.status(404).json({message:"Job not found",success:false});
     }
-    // create new applicaiton
+    // create new applicaton
     const application = await Application.create({
       job:jobId,
       applicant:userId,
@@ -35,7 +35,7 @@ export const applyJob = async (req,res)=>{
 export const getAppliedJobs = async (req,res)=>{
     try {
         const userId = req.id;
-        const applicaiton = await Application.find({applicant:userId}).sort({createdAt:-1}).populate({
+        const applicaton = await Application.find({applicant:userId}).sort({createdAt:-1}).populate({
             path:"job",
             options:{sort:{createdAt:-1}},
             populate:{
@@ -43,10 +43,10 @@ export const getAppliedJobs = async (req,res)=>{
                 options:{sort:{createdAt:-1}},
             }
         });
-        if(!applicaiton){
+        if(!applicaton){
             return res.status(404).json({message:"No applications found",success:false});
         };
-        return res.status(200).json({applicaiton,success:true});
+        return res.status(200).json({applicaton,success:true});
     } catch (error) {
         console.log(error);
     }
@@ -88,16 +88,16 @@ export const updateStatus = async (req,res) =>{
             });
       }
       // find application using applicaionId
-      const applicaiton = await Application.findOne({_id:applicationId});
-          if(!applicaiton){
+      const applicaton = await Application.findOne({_id:applicationId});
+          if(!applicaton){
               return res.status(404).json({
-                message:"applicaiton not found",
+                message:"applicaton not found",
                 success:false
               });
           }
           // updateStatus
-          applicaiton.status = status.toLowerCase();
-          await applicaiton.save();
+          applicaton.status = status.toLowerCase();
+          await applicaton.save();
           return res.status(200).json({
             message :"status updated successfully",
             success :true 
