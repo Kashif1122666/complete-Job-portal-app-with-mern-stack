@@ -21,13 +21,12 @@ const JobDescription = () => {
    const applyJobHandler=  async()=>{
             try {
               const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`,{withCredentials:true})
-              console.log(res.data.message)
               if(res.data.success){
                 setIsApplied(true) // update local state
                 const updatedSingleJob = {...singleJob,applications:[...singleJob.applications,{applicant:user?._id}]}
                 dispatch(setSingleJob(updatedSingleJob))// to update ui in real time
                    toast.success(res.data.message)
-                   console.log(res.data.message)
+                   
                   }
                 } catch (error) {
                   console.log(error)

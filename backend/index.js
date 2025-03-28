@@ -8,12 +8,15 @@ import companyRoute from './routes/company.route.js'
 import jobRoute from './routes/job.route.js'
 import applicationRoute from './routes/application.route.js'
 import { Job } from './models/job.model.js';
+import path  from 'path';
 
 // Import all models
 import { User } from "./models/user.model.js"; 
 import { Application } from "./models/application.model.js";
 dotenv.config({});
 const app = express();
+
+const _dirname = path.resolve();
 
 //middleware
 app.use(express.json());
@@ -47,7 +50,10 @@ app.get('/home' ,(req,res)=>{
   })
 });
  
-
+ app.use(express.static(path.join(_dirname,"/frontend/dist")))
+ app.get('*',(_,res)=>{
+     res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))
+ })
 
 const PORT = process.env.PORT||5000;
 app.listen(PORT, () => {
