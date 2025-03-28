@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../ui/shared/Navbar";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
@@ -55,7 +55,11 @@ const Login = () => {
           dispatch(setLoading(false));
         }
     }
-
+           useEffect(()=>{
+              if(user){
+                navigate("/");
+              }
+           },[]);
 
   return (
     <div>
