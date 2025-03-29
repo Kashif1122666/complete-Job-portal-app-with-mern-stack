@@ -23,13 +23,23 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-  origin: /http:\/\/localhost:\d+$/, // Allows localhost on any port
-  credentials: true,
+  origin: [
+    "http://localhost:5173", // Local development (Vite default port)
+    "https://complete-job-portal-app-with-mern-stack.vercel.app" // Vercel frontend
+  ],
+  credentials: true, // Allow cookies and authentication headers
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 
 connectDB()
+
+app.use(express.static(path.join(_dirname,"/frontend/dist")))
+app.get('*',(_,res)=>{
+    res.sendFile(path.resolve(_dirname,"frontend","dist","index.html"))
+})
 
 
 
@@ -50,10 +60,7 @@ app.get('/home' ,(req,res)=>{
   })
 });
  
- app.use(express.static(path.join(_dirname,"/frontend/dist")))
- app.get('*',(_,res)=>{
-     res.sendFile(path.resolve(_dirname,"frontend","dist","index.html"))
- })
+
 
 const PORT = process.env.PORT||5000;
 app.listen(PORT, () => {
