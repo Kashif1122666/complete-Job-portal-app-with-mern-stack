@@ -24,14 +24,15 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
   origin: [
-    "http://localhost:5173", // Local development (Vite default port)
-    "https://complete-job-portal-app-with-mern-stack.vercel.app" // Vercel frontend
+    "http://localhost:5173",  
+    "http://localhost:5174",  
+    "https://complete-job-portal-app-with-mern-stack.vercel.app", 
   ],
-  credentials: true, // Allow cookies and authentication headers
+  credentials: true, 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
+
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 
 
 connectDB()
