@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Navbar from './ui/shared/Navbar'
-import Job from './job';
+import Job from './Job';
 import { useDispatch, useSelector } from 'react-redux';
 import store from '@/redux/store';
 import { setSearchedQuery } from '@/redux/jobSlice';
