@@ -23,11 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-  origin: [
-    "http://localhost:5173",  
-    "http://localhost:5174",  
-    "https://complete-job-portal-app-with-mern-stack.vercel.app", 
-  ],
+  origin: "*", // Allow all origins
   credentials: true, 
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
@@ -35,12 +31,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
+
 connectDB()
 
-app.use(express.static(path.join(_dirname,"/frontend/dist")))
-app.get('*',(_,res)=>{
-    res.sendFile(path.resolve(_dirname,"frontend","dist","index.html"))
-})
+
 
 
 
